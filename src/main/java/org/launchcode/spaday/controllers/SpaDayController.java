@@ -43,6 +43,14 @@ public class SpaDayController {
         }
     }
 
+    public boolean checkManiPedi(String manipedi) {
+        if (manipedi.equals("manicure")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping(value="")
     @ResponseBody
     public String customerForm () {
@@ -69,19 +77,23 @@ public class SpaDayController {
     @PostMapping(value="")
     public String spaMenu(@RequestParam String name, @RequestParam String skintype, @RequestParam String manipedi, Model model) {
 
-        ArrayList<String> facials = new ArrayList<String>();
+        ArrayList<String> facials = new ArrayList<>();
         facials.add("Microdermabrasion");
         facials.add("Hydrofacial");
         facials.add("Rejuvenating");
         facials.add("Enzyme Peel");
 
-        ArrayList<String> appropriateFacials = new ArrayList<String>();
+        ArrayList<String> appropriateFacials = new ArrayList<>();
         for (int i = 0; i < facials.size(); i ++) {
             if (checkSkinType(skintype,facials.get(i))) {
+
                 appropriateFacials.add(facials.get(i));
             }
         }
-
+        model.addAttribute("name", name);
+        model.addAttribute("skintype", skintype);
+        model.addAttribute("manipedi", manipedi);
+        model.addAttribute("appropriateFacials", appropriateFacials);
         return "menu";
     }
 }
