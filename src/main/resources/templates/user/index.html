@@ -6,9 +6,30 @@
     <title>Welcome</title>
 </head>
 <body>
+<<<<<<< HEAD
     <p th:text = "'Welcome ' + ${user.username} + '!'"></p>
     <a th:href="@{/}">
         Select your spa services here
     </a>
+=======
+<h1>Welcome!</h1>
+<h2>Your Username:</h2>
+<p th:text="${thisUser.username}"></p>
+<h2>Your E-Mail:</h2>
+<p th:text="${thisUser.email}"></p>
+<a th:href="@{/}">Select Your Services</a>
+<table>
+    <thead>
+        <tr>
+            <td>Current Users:</td>
+        </tr>
+    </thead>
+    <th:block th:each="user : ${users}">
+        <tr>
+            <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.username}">View Detail</a></td>
+        </tr>
+    </th:block>
+</table>
+>>>>>>> 208c7f6... Completed bonus missions - added data layer, id functionality, date functionality, user detail page
 </body>
 </html>
