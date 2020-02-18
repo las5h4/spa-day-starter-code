@@ -8,13 +8,13 @@
     <p th:text="${passwordError}"></p>
     <form id="addUser" method="post">
         <label>Username:</label>
-        <input type="text" name="username" th:value="${prevUsername}"/>
+        <input th:field="${user.username}"/>
         <label>E-Mail: </label>
-        <input type="email" name="email" th:value="${prevEmail}"/>
+        <input th:field="${user.email}"/>
         <label>Password:</label>
-        <input type="password" name="password" />
+        <input type="password" th:field="${user.password}" />
         <label>Verify Password:</label>
-        <input type="password" name="verify" />
+        <input type="password" th:field="${user.verify}" />
         <input type="submit" value="Add User"/>
     </form>
 </body>
