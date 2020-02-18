@@ -1,27 +1,23 @@
 package org.launchcode.spaday.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Objects;
 
 public class User {
 
     @NotBlank
-    @Min(value = 5, message = "Username should be between 5 and 15 characters long")
-    @Max(value = 15, message = "Username should be between 5 and 15 characters long")
+    @Size(min = 5, max = 15, message = "Username should be between 5 and 15 characters long")
     private String username;
 
     @Email(message = "Not a valid E-Mail")
     private String email;
 
     @NotBlank(message = "please create a password")
-    @Min(value = 6, message = "Password must be at least 6 characters long")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
-    @NotBlank(message = "please re-type your password for verification")
+    @NotNull(message = "Your passwords must match!")
     private String verify;
 
     private int id;
@@ -42,6 +38,12 @@ public class User {
     public User() {
         this.id = nextId;
         nextId++;
+    }
+
+    private void checkPassword() {
+        if (!password.equals(verify) && (password != null) && (verify != null)) {
+            verify = null;
+        }
     }
 
     public String getUsername() {
@@ -66,6 +68,7 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        this.checkPassword();
     }
 
     public int getId() {
@@ -78,6 +81,7 @@ public class User {
 
     public void setVerify(String verify) {
         this.verify = verify;
+        this.checkPassword();
     }
 
     public String getVerify() {

@@ -22,7 +22,9 @@ public class UserController {
     @PostMapping("add")
     public String processAddUserForm(@ModelAttribute @Valid User user, Errors errors, Model model) {
         // add form submission handling code here
-        if (user.getPassword() != user.getVerify() || errors.hasErrors()) {
+        String password = user.getPassword();
+        String verify = user.getVerify();
+        if (!password.equals(verify) || errors.hasErrors()) {
 //            model.addAttribute("thisUser", user);
 //            model.addAttribute("users", UserData.getAll());
             String passwordError = "Errors!";
@@ -32,8 +34,11 @@ public class UserController {
             model.addAttribute("prevUsername", prevUsername);
             model.addAttribute("prevEmail", prevEmail);
             return "user/add";
+//        } else if (errors.hasErrors()) {
+
         } else {
             UserData.add(user);
+            model.addAttribute("users", UserData.getAll());
             return "user/index";
         }
 

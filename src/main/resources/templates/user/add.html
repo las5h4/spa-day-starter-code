@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Add User Form</title>
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body>
-    <p th:text="${passwordError}"></p>
+
     <form id="addUser" method="post">
+        <p class="errors" th:errors="${user.username}"></p>
         <label>Username:</label>
-        <input th:field="${user.username}"/>
+        <input th:field="${user.username}"/><br/>
+        <p class="errors" th:errors="${user.email}"></p>
         <label>E-Mail: </label>
-        <input th:field="${user.email}"/>
+        <input th:field="${user.email}"/><br/>
+        <p class="errors" th:errors="${user.password}"></p>
         <label>Password:</label>
-        <input type="password" th:field="${user.password}" />
+        <input type="password" th:field="${user.password}" /><br/>
+        <p class="errors" th:errors="${user.verify}"></p>
         <label>Verify Password:</label>
-        <input type="password" th:field="${user.verify}" />
+        <input type="password" th:field="${user.verify}" /><br/>
         <input type="submit" value="Add User"/>
     </form>
 </body>
